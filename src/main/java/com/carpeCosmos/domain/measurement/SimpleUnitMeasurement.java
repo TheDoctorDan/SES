@@ -1,29 +1,27 @@
 package com.carpeCosmos.domain.measurement;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
 @Getter
+@AllArgsConstructor
 public class SimpleUnitMeasurement
 {
     private UnitPrefix unitPrefix;
     private UnitMeasureType unitMeasureType;
 
-    public SimpleUnitMeasurement(UnitPrefix unitPrefix, UnitMeasureType unitMeasureType)
-    {
-        this.unitPrefix = unitPrefix;
-        this.unitMeasureType = unitMeasureType;
-    }
 
+    // constructor, assume uno
     public SimpleUnitMeasurement(UnitMeasureType unitMeasureType)
     {
         this.unitPrefix = UnitPrefix.UNO;
         this.unitMeasureType = unitMeasureType;
     }
 
-    public SimpleUnitMeasurement sumUnitPrefixWithPowerOf10(int powerOf10) throws NoSuchElementException
+    public SimpleUnitMeasurement addPowerOf10ToUnitMeasurementPrefix(int powerOf10) throws NoSuchElementException
     {
         if(powerOf10==0)
             return this;
