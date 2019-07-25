@@ -1,10 +1,12 @@
 package com.carpeCosmos.domain.measurement;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.NoSuchElementException;
 
 @Getter
+@AllArgsConstructor
 public enum UnitPrefix
 {
     YOTTA(1.0E+24, 24, "septillion", "yotta-", "Y"),
@@ -35,15 +37,8 @@ public enum UnitPrefix
     private String prefixText;
     private String symbol;
 
-    UnitPrefix(double factor, int powerOf10, String inWords, String prefixText, String symbol)
-    {
-        this.factor = factor;
-        this.powerOf10 = powerOf10;
-        this.inWords = inWords;
-        this.prefixText = prefixText;
-        this.symbol = symbol;
-    }
 
+    // find enum UnitPrefix by factor amount
     public static UnitPrefix findByfactor(double factor) throws NoSuchElementException
     {
         for (UnitPrefix unitPrefix : values())
@@ -57,6 +52,7 @@ public enum UnitPrefix
     }
 
 
+    // find enum UnitPrefix by power of 10 amount
     public static UnitPrefix findByPowerOf10(int powerOf10) throws NoSuchElementException
     {
         for (UnitPrefix unitPrefix : values())
@@ -70,6 +66,7 @@ public enum UnitPrefix
     }
 
 
+    // add power of 10 value and get resulting UnitPrefix
     public UnitPrefix addPowerOf10(int powerOf10) throws NoSuchElementException
     {
         int sumPowerOf10 = this.powerOf10 + powerOf10;
@@ -77,6 +74,7 @@ public enum UnitPrefix
     }
 
 
+    // sum power of 10 of this UnitPrefix and passed UnitPrefix and get the resulting UnitPrefix
     public UnitPrefix sumUnitPrefixes(UnitPrefix unitPrefix) throws NoSuchElementException
     {
         int powerOf10 = this.powerOf10 + unitPrefix.powerOf10;
@@ -84,10 +82,20 @@ public enum UnitPrefix
     }
 
 
+    // subtract passed UnitPrefix from this UnitPrefix and get the resulting UnitPrefix
     public UnitPrefix subtractUnitPrefixes(UnitPrefix unitPrefix) throws NoSuchElementException
     {
         int powerOf10 = this.powerOf10 - unitPrefix.powerOf10;
         return findByPowerOf10(powerOf10);
     }
+
+
+    // subtract passed UnitPrefix from this UnitPrefix and return the resulting power of 10
+    public int differenceInPowerOf10(UnitPrefix other)
+    {
+        return this.powerOf10 - other.powerOf10;
+    }
+
+
 }
 
