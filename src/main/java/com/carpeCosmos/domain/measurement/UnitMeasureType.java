@@ -3,33 +3,29 @@ package com.carpeCosmos.domain.measurement;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public interface UnitMeasureType
-{
+public interface UnitMeasureType {
 
 
-    public String name();
+    String name();
 
-    public String getSymbol();
+    String getSymbol();
 
-    public boolean isBaseUnitDimension();
+    boolean isBaseUnitDimension();
 
-    public List<SimpleUnitMeasurement> getNumeratorSimpleUnitMeasurementList();
+    List<SimpleUnitMeasurement> getNumeratorSimpleUnitMeasurementList();
 
-    public List<SimpleUnitMeasurement> getDenominatorSimpleUnitMeasurementList();
+    List<SimpleUnitMeasurement> getDenominatorSimpleUnitMeasurementList();
 
-    public boolean isNotToBeReduced();
+    UnitPrefix getDefaultUnitPrefix();
 
 
-    public static <T extends Enum<T> & UnitMeasureType> T findBySymbol(Class<T> enumClass, String symbol) throws NoSuchElementException
-    {
-        for (T unitDimensionType : enumClass.getEnumConstants())
-        {
+    static <T extends Enum<T> & UnitMeasureType> T findBySymbol(Class<T> enumClass, String symbol) throws NoSuchElementException {
+        for (T unitDimensionType : enumClass.getEnumConstants()) {
             if (unitDimensionType.getSymbol().equals(symbol))
                 return unitDimensionType;
         }
         throw new NoSuchElementException("No " + enumClass.getSimpleName() + " Enum with symbol of " + symbol + ".");
     }
 
-    ;
 
 }
