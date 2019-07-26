@@ -6,17 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static com.carpeCosmos.domain.measurement.UnitPrefix.UNO;
 import static com.carpeCosmos.domain.measurement.UnitMeasureBaseType.EACH;
+import static com.carpeCosmos.domain.measurement.UnitPrefix.UNO;
 
 @Getter
-public class UnitMeasurementFraction
-{
+public class UnitMeasurementFraction {
     private List<SimpleUnitMeasurement> numeratorSimpleUnitMeasurementList;
     private List<SimpleUnitMeasurement> denominatorSimpleUnitMeasurementList;
 
-    public UnitMeasurementFraction(List<SimpleUnitMeasurement> inputNumeratorSimpleUnitMeasurementList, List<SimpleUnitMeasurement> inputDenominatorSimpleUnitMeasurementList)
-    {
+
+    public UnitMeasurementFraction(List<SimpleUnitMeasurement> inputNumeratorSimpleUnitMeasurementList, List<SimpleUnitMeasurement> inputDenominatorSimpleUnitMeasurementList) {
         this.numeratorSimpleUnitMeasurementList = new ArrayList<>();
         this.denominatorSimpleUnitMeasurementList = new ArrayList<>();
         this.numeratorSimpleUnitMeasurementList.addAll(inputNumeratorSimpleUnitMeasurementList);
@@ -24,48 +23,37 @@ public class UnitMeasurementFraction
     }
 
 
-    public UnitMeasurementFraction()
-    {
+    public UnitMeasurementFraction() {
         this.numeratorSimpleUnitMeasurementList = new ArrayList<>();
         this.denominatorSimpleUnitMeasurementList = new ArrayList<>();
     }
 
 
-    public static UnitMeasurementFraction reduceUnitTypes(UnitMeasurementFraction inputUnitMeasurementFraction, UnitPrefix inputUnitPrefix)
-    {
+    public static UnitMeasurementFraction reduceUnitTypes(UnitMeasurementFraction inputUnitMeasurementFraction, UnitPrefix inputUnitPrefix) {
 
         UnitMeasurementFraction resultUnitMeasurementFraction = new UnitMeasurementFraction();
 
-        if (!inputUnitPrefix.equals(UNO))
-        {
+        if (!inputUnitPrefix.equals(UNO)) {
             resultUnitMeasurementFraction.numeratorSimpleUnitMeasurementList.add(new SimpleUnitMeasurement(inputUnitPrefix, EACH));
             resultUnitMeasurementFraction.denominatorSimpleUnitMeasurementList.add(new SimpleUnitMeasurement(UNO, EACH));
         }
 
         //reduce all to base types
-        for (SimpleUnitMeasurement simpleUnitMeasurement : inputUnitMeasurementFraction.getNumeratorSimpleUnitMeasurementList())
-        {
-            if (simpleUnitMeasurement.getUnitMeasureType().isNotToBeReduced())
-            {
-                resultUnitMeasurementFraction.numeratorSimpleUnitMeasurementList.add(new SimpleUnitMeasurement(simpleUnitMeasurement.getUnitPrefix(), simpleUnitMeasurement.getUnitMeasureType()));
-            } else
-            {
-                UnitMeasurementFraction tempUnitMeasurementFraction = reduceUnitTypes(
-                        simpleUnitMeasurement.getUnitMeasureType().getNumeratorSimpleUnitMeasurementList(),
-                        simpleUnitMeasurement.getUnitMeasureType().getDenominatorSimpleUnitMeasurementList(),
-                        simpleUnitMeasurement.getUnitPrefix());
-                resultUnitMeasurementFraction.numeratorSimpleUnitMeasurementList.addAll(tempUnitMeasurementFraction.getNumeratorSimpleUnitMeasurementList());
-                resultUnitMeasurementFraction.denominatorSimpleUnitMeasurementList.addAll(tempUnitMeasurementFraction.getDenominatorSimpleUnitMeasurementList());
-            }
+        for (SimpleUnitMeasurement simpleUnitMeasurement : inputUnitMeasurementFraction.getNumeratorSimpleUnitMeasurementList()) {
+
+            UnitMeasurementFraction tempUnitMeasurementFraction = reduceUnitTypes(
+                    simpleUnitMeasurement.getUnitMeasureType().getNumeratorSimpleUnitMeasurementList(),
+                    simpleUnitMeasurement.getUnitMeasureType().getDenominatorSimpleUnitMeasurementList(),
+                    simpleUnitMeasurement.getUnitPrefix());
+            resultUnitMeasurementFraction.numeratorSimpleUnitMeasurementList.addAll(tempUnitMeasurementFraction.getNumeratorSimpleUnitMeasurementList());
+            resultUnitMeasurementFraction.denominatorSimpleUnitMeasurementList.addAll(tempUnitMeasurementFraction.getDenominatorSimpleUnitMeasurementList());
+
         }
 
-        for (SimpleUnitMeasurement simpleUnitMeasurement : inputUnitMeasurementFraction.getDenominatorSimpleUnitMeasurementList())
-        {
-            if (simpleUnitMeasurement.getUnitMeasureType().isBaseUnitDimension())
-            {
+        for (SimpleUnitMeasurement simpleUnitMeasurement : inputUnitMeasurementFraction.getDenominatorSimpleUnitMeasurementList()) {
+            if (simpleUnitMeasurement.getUnitMeasureType().isBaseUnitDimension()) {
                 resultUnitMeasurementFraction.denominatorSimpleUnitMeasurementList.add(new SimpleUnitMeasurement(simpleUnitMeasurement.getUnitPrefix(), simpleUnitMeasurement.getUnitMeasureType()));
-            } else
-            {
+            } else {
                 UnitMeasurementFraction tempUnitMeasurementFraction = reduceUnitTypes(
                         simpleUnitMeasurement.getUnitMeasureType().getNumeratorSimpleUnitMeasurementList(),
                         simpleUnitMeasurement.getUnitMeasureType().getDenominatorSimpleUnitMeasurementList(),
@@ -78,36 +66,27 @@ public class UnitMeasurementFraction
     }
 
 
-    public static UnitMeasurementFraction reduceUnitTypes(List<SimpleUnitMeasurement> inputNumeratorSimpleUnitMeasurementList, List<SimpleUnitMeasurement> inputDenominatorSimpleUnitMeasurementList, UnitPrefix inputUnitPrefix)
-    {
+    public static UnitMeasurementFraction reduceUnitTypes(List<SimpleUnitMeasurement> inputNumeratorSimpleUnitMeasurementList, List<SimpleUnitMeasurement> inputDenominatorSimpleUnitMeasurementList, UnitPrefix inputUnitPrefix) {
         UnitMeasurementFraction tempUnitMeasurementFraction = new UnitMeasurementFraction(inputNumeratorSimpleUnitMeasurementList, inputDenominatorSimpleUnitMeasurementList);
         return reduceUnitTypes(tempUnitMeasurementFraction, inputUnitPrefix);
     }
 
 
-    public static UnitMeasurementFraction cancelUnitTypes(UnitMeasurementFraction inputUnitMeasurementFraction)
-    {
-        List<SimpleUnitMeasurement> tempDenominatorSimpleUnitMeasurementList = new ArrayList<>();
-        tempDenominatorSimpleUnitMeasurementList.addAll(inputUnitMeasurementFraction.getDenominatorSimpleUnitMeasurementList());
+    public static UnitMeasurementFraction cancelUnitTypes(UnitMeasurementFraction inputUnitMeasurementFraction) {
+        List<SimpleUnitMeasurement> tempDenominatorSimpleUnitMeasurementList = new ArrayList<>(inputUnitMeasurementFraction.getDenominatorSimpleUnitMeasurementList());
         UnitMeasurementFraction resultUnitMeasurementFraction = new UnitMeasurementFraction();
-        for (SimpleUnitMeasurement simpleUnitMeasurement : inputUnitMeasurementFraction.getNumeratorSimpleUnitMeasurementList())
-        {
-            for (SimpleUnitMeasurement simpleUnitMeasurement1 : tempDenominatorSimpleUnitMeasurementList)
-            {
-                if (simpleUnitMeasurement.getUnitMeasureType().equals(simpleUnitMeasurement1.getUnitMeasureType()))
-                {
-                    if (simpleUnitMeasurement.getUnitPrefix().equals(simpleUnitMeasurement1.getUnitPrefix()))
-                    {
+        for (SimpleUnitMeasurement simpleUnitMeasurement : inputUnitMeasurementFraction.getNumeratorSimpleUnitMeasurementList()) {
+            for (SimpleUnitMeasurement simpleUnitMeasurement1 : tempDenominatorSimpleUnitMeasurementList) {
+                if (simpleUnitMeasurement.getUnitMeasureType().equals(simpleUnitMeasurement1.getUnitMeasureType())) {
+                    if (simpleUnitMeasurement.getUnitPrefix().equals(simpleUnitMeasurement1.getUnitPrefix())) {
                         tempDenominatorSimpleUnitMeasurementList.remove(simpleUnitMeasurement1);
                         break;
-                    } else
-                    {
+                    } else {
                         tempDenominatorSimpleUnitMeasurementList.remove(simpleUnitMeasurement1);
                         tempDenominatorSimpleUnitMeasurementList.add(new SimpleUnitMeasurement(simpleUnitMeasurement1.getUnitPrefix(), EACH));
                         resultUnitMeasurementFraction.getNumeratorSimpleUnitMeasurementList().add(new SimpleUnitMeasurement(simpleUnitMeasurement.getUnitPrefix(), EACH));
                     }
-                } else
-                {
+                } else {
                     resultUnitMeasurementFraction.getNumeratorSimpleUnitMeasurementList().add(simpleUnitMeasurement);
                 }
             }
@@ -119,44 +98,38 @@ public class UnitMeasurementFraction
     }
 
 
-    public static double factorNumericUnitPrefixes(UnitMeasurementFraction outputUnitMeasurementFraction, UnitMeasurementFraction inputUnitMeasurementFraction)
-    {
+    /* factorNumericUnitPrefixes
+    Given inputUnitMeasurementFraction
+
+     */
+    public static double factorNumericUnitPrefixes(UnitMeasurementFraction outputUnitMeasurementFraction, UnitMeasurementFraction inputUnitMeasurementFraction) {
         int powerOf10 = 0;
 
-        for (SimpleUnitMeasurement simpleUnitMeasurement : inputUnitMeasurementFraction.getNumeratorSimpleUnitMeasurementList())
-        {
-            if (simpleUnitMeasurement.getUnitMeasureType().equals(EACH))
-            {
+        for (SimpleUnitMeasurement simpleUnitMeasurement : inputUnitMeasurementFraction.getNumeratorSimpleUnitMeasurementList()) {
+            if (simpleUnitMeasurement.getUnitMeasureType().equals(EACH)) {
                 powerOf10 += simpleUnitMeasurement.getUnitPrefix().getPowerOf10();
-            } else
-            {
+            } else {
                 SimpleUnitMeasurement alteredSimpleUnitMeasurement;
-                try
-                {
-                    alteredSimpleUnitMeasurement = simpleUnitMeasurement.sumUnitPrefixWithPowerOf10(powerOf10);
+                try {
+                    alteredSimpleUnitMeasurement = simpleUnitMeasurement.addPowerOf10ToUnitMeasurementPrefix(powerOf10);
                     outputUnitMeasurementFraction.getNumeratorSimpleUnitMeasurementList().add(alteredSimpleUnitMeasurement);
                     powerOf10 = 0;
-                } catch (NoSuchElementException e)
-                {
+                } catch (NoSuchElementException e) {
                     outputUnitMeasurementFraction.getNumeratorSimpleUnitMeasurementList().add(simpleUnitMeasurement);
                 }
             }
         }
 
-        for (SimpleUnitMeasurement simpleUnitMeasurement : inputUnitMeasurementFraction.getDenominatorSimpleUnitMeasurementList())
-        {
-            if (simpleUnitMeasurement.getUnitMeasureType().equals(EACH))
-            {
+        for (SimpleUnitMeasurement simpleUnitMeasurement : inputUnitMeasurementFraction.getDenominatorSimpleUnitMeasurementList()) {
+            if (simpleUnitMeasurement.getUnitMeasureType().equals(EACH)) {
                 powerOf10 -= simpleUnitMeasurement.getUnitPrefix().getPowerOf10();
-            } else
-            {
+            } else {
                 SimpleUnitMeasurement alteredSimpleUnitMeasurement;
                 try {
-                    alteredSimpleUnitMeasurement = simpleUnitMeasurement.sumUnitPrefixWithPowerOf10(powerOf10);
+                    alteredSimpleUnitMeasurement = simpleUnitMeasurement.addPowerOf10ToUnitMeasurementPrefix(powerOf10);
                     outputUnitMeasurementFraction.getDenominatorSimpleUnitMeasurementList().add(alteredSimpleUnitMeasurement);
                     powerOf10 = 0;
-                } catch(NoSuchElementException e)
-                {
+                } catch (NoSuchElementException e) {
                     outputUnitMeasurementFraction.getDenominatorSimpleUnitMeasurementList().add(simpleUnitMeasurement);
                 }
             }
