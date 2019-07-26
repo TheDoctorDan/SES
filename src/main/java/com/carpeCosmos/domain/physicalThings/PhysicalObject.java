@@ -1,6 +1,6 @@
-package com.carpeCosmos.domain.physicalObject;
+package com.carpeCosmos.domain.physicalThings;
 
-public interface SESObject
+public interface PhysicalObject
 {
 //    public SESMass mass
 //    public SESLocation location;
