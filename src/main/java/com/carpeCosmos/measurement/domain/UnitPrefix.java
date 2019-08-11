@@ -1,4 +1,4 @@
-package com.carpeCosmos.domain.measurement;
+package com.carpeCosmos.domain.measurement.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
