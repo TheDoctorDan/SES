@@ -1,12 +1,11 @@
-package com.carpeCosmos.domain.measurement;
+package com.carpeCosmos.measurement.domain;
 
-import com.carpeCosmos.domain.measurement.domain.UnitPrefix;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
 
-import static com.carpeCosmos.domain.measurement.domain.UnitPrefix.*;
+import static com.carpeCosmos.measurement.domain.UnitPrefix.*;
 import static org.junit.Assert.*;
 
 public class UnitPrefixTest
