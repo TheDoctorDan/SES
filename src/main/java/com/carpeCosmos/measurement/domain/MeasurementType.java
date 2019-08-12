@@ -1,4 +1,4 @@
-package com.carpeCosmos.domain.measurement.domain;
+package com.carpeCosmos.measurement.domain;
 
 public enum MeasurementType
 {
