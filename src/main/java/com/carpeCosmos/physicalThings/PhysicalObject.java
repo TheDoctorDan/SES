@@ -1,6 +1,6 @@
-package com.carpeCosmos.domain.physicalThings;
+package com.carpeCosmos.physicalThings;
 
-import com.carpeCosmos.domain.geometry.PointIn3Dim;
+import com.carpeCosmos.geometry.PointIn3Dim;
 
 public interface PhysicalObject
 {

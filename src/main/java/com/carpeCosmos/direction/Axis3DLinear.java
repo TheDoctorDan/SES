@@ -1,4 +1,4 @@
-package com.carpeCosmos.domain.direction;
+package com.carpeCosmos.direction;
 
 public enum Axis3DLinear implements Axis
 {

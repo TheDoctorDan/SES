@@ -1,6 +1,6 @@
-package com.carpeCosmos.domain.physicalThings;
+package com.carpeCosmos.physicalThings;
 
-import com.carpeCosmos.domain.measurement.domain.FractionUnitMeasure;
+import com.carpeCosmos.measurement.domain.FractionUnitMeasure;
 
 public class PhysicalQuantity {
     private double scalar;

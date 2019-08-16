@@ -1,6 +1,6 @@
-package com.carpeCosmos.domain.reference;
+package com.carpeCosmos.reference;
 
-import com.carpeCosmos.domain.geometry.PointIn3Dim;
+import com.carpeCosmos.geometry.PointIn3Dim;
 import lombok.Getter;
 
 @Getter

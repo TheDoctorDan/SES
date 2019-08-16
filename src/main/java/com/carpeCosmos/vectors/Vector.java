@@ -1,6 +1,6 @@
-package com.carpeCosmos.domain.vectors;
+package com.carpeCosmos.vectors;
 
-import com.carpeCosmos.domain.direction.Direction;
+import com.carpeCosmos.direction.Direction;
 
 public class Vector
 {

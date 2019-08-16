@@ -1,6 +1,6 @@
-package com.carpeCosmos.domain.vectors;
+package com.carpeCosmos.vectors;
 
-import com.carpeCosmos.domain.measurement.domain.FractionUnitMeasure;
+import com.carpeCosmos.measurement.domain.FractionUnitMeasure;
 import lombok.AllArgsConstructor;
 
 
