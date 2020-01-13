@@ -1,6 +1,4 @@
-package com.carpeCosmos.domain.reference;
-
-import com.carpeCosmos.domain.geometry.Position;
+package com.carpeCosmos.domain.geometry;
 
 public class FrameOfReference
 {
