@@ -1,10 +1,10 @@
 package com.carpeCosmos.domain.reference;
 
-import javafx.geometry.Point3D;
+import com.carpeCosmos.domain.geometry.Position;
 
 public class FrameOfReference
 {
     private FrameOfReference parentFrameOfReference;
-    private 3DPoint3D center;
+    private Position center;
 
 }
