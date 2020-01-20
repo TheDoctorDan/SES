@@ -1,4 +1,4 @@
-package com.carpeCosmos.domain.vectors;
+package com.carpeCosmos.geometry;
 
 import lombok.Builder;
 

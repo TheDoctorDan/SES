@@ -1,7 +1,6 @@
 package com.carpeCosmos.domain.geometry;
 
-import com.carpeCosmos.domain.vectors.Scalar;
-import com.carpeCosmos.domain.vectors.Vector;
+import com.carpeCosmos.geometry.Vector;
 
 public class Velocity {
     private Vector vector;
