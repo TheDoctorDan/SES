@@ -1,6 +1,4 @@
-package com.carpeCosmos.domain.geometry;
-
-import com.carpeCosmos.geometry.Scalar;
+package com.carpeCosmos.geometry;
 
 public class Position {
     private Scalar x;
