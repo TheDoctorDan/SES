@@ -1,42 +1,42 @@
 package com.carpeCosmos.domain.vectors;
 
-import com.carpeCosmos.domain.measurement.SimpleUnitMeasurement;
-import com.carpeCosmos.domain.measurement.UnitMeasurementFraction;
+import lombok.Builder;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.carpeCosmos.domain.measurement.UnitPrefix.*;
 
+@Builder
 public class Scalar
 {
-    private double amount;
+    private Double magnitude;
     private UnitMeasurementFraction unitMeasurementFraction;
 
-    public Scalar(double amount, List<SimpleUnitMeasurement> inputNumeratorSimpleUnitMeasurementList, List<SimpleUnitMeasurement> inputDenominatorSimpleUnitMeasurementList)
+    public Scalar(Double magnitude, List<SimpleUnitMeasurement> inputNumeratorSimpleUnitMeasurementList, List<SimpleUnitMeasurement> inputDenominatorSimpleUnitMeasurementList)
     {
-        this.amount = amount;
-        UnitMeasurementFraction tempUnitMeasurementFraction = new UnitMeasurementFraction(inputNumeratorSimpleUnitMeasurementList, inputDenominatorSimpleUnitMeasurementList);
-
-        UnitMeasurementFraction baseTypesUnitMeasurementFraction = UnitMeasurementFraction.reduceUnitTypes(tempUnitMeasurementFraction, UNO);
-        UnitMeasurementFraction simplifiedUnitMeasurementFraction = UnitMeasurementFraction.cancelUnitTypes(baseTypesUnitMeasurementFraction);
-
-        this.unitMeasurementFraction = new UnitMeasurementFraction();
-        this.amount = amount * UnitMeasurementFraction.reduceDimensionUnitPrefixEach(this.unitMeasurementFraction, simplifiedUnitMeasurementFraction);;
+        this.magnitude = magnitude;
+        this.unitMeasurementFraction = new UnitMeasurementFraction(inputNumeratorSimpleUnitMeasurementList, inputDenominatorSimpleUnitMeasurementList);
     }
 
 
-    public Scalar(double amount, SimpleUnitMeasurement simpleUnitMeasurement)
+    public Scalar(Double magnitude, SimpleUnitMeasurement simpleUnitMeasurement)
     {
-        new Scalar(amount, Arrays.asList(simpleUnitMeasurement), Collections.emptyList());
+        new Scalar(magnitude, Arrays.asList(simpleUnitMeasurement), Collections.emptyList());
     }
 
-    public Scalar(double amount, UnitMeasurementFraction unitMeasurementFraction)
+    public Scalar(Double magnitude, UnitMeasurementFraction unitMeasurementFraction)
     {
-        new Scalar(amount, unitMeasurementFraction.getNumeratorSimpleUnitMeasurementList(), unitMeasurementFraction.getDenominatorSimpleUnitMeasurementList());
+        new Scalar(magnitude, unitMeasurementFraction.getNumeratorSimpleUnitMeasurementList(), unitMeasurementFraction.getDenominatorSimpleUnitMeasurementList());
     }
 
+
+    public Scalar squared(){
+        return Scalar.builder()
+                .magnitude(magnitude.doubleValue()*magnitude.doubleValue())
+                .unitMeasurementFraction(UnitMeasurementFraction(unitMeasurementFraction.times(unitMeasurementFraction)))
+                .build();
+    }
 
 
 
