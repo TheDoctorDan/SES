@@ -1,7 +1,5 @@
 package com.carpeCosmos.geometry;
 
-import com.carpeCosmos.domain.direction.Direction;
-import com.carpeCosmos.geometry.Scalar;
 
 public class Vector
 {
