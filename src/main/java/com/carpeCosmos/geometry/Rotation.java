@@ -1,6 +1,4 @@
-package com.carpeCosmos.domain.geometry;
-
-import com.carpeCosmos.geometry.Vector;
+package com.carpeCosmos.geometry;
 
 
 public class Rotation {
