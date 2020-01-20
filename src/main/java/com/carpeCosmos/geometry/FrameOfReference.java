@@ -1,8 +1,9 @@
-package com.carpeCosmos.domain.geometry;
+package com.carpeCosmos.geometry;
 
 public class FrameOfReference
 {
     private FrameOfReference parentFrameOfReference;
-    private Position center;
+    private Position centerOffset;
+    private Rotation rotationRelative;
 
 }
