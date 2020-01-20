@@ -1,4 +1,4 @@
-package com.carpeCosmos.domain.geometry;
+package com.carpeCosmos.geometry;
 
 import com.carpeCosmos.geometry.Vector;
 
