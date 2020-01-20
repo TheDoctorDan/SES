@@ -1,5 +1,6 @@
 package com.carpeCosmos.geometry;
 
+import com.carpeCosmos.unitMeasure.domain.*;
 import lombok.Builder;
 
 import java.util.Arrays;
