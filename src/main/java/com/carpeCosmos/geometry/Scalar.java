@@ -31,6 +31,10 @@ public class Scalar
         new Scalar(magnitude, unitMeasurementFraction.getNumeratorSimpleUnitMeasurementList(), unitMeasurementFraction.getDenominatorSimpleUnitMeasurementList());
     }
 
+    public Scalar matchUnitMeasurementScale(Scalar other){
+        if(this,unitMeasurementFraction.isEquivalentMeasurement(other.unitMeasurementFraction))
+        Scalar result = Scalar.builder().magnitude(mag).unitMeasurementFraction(umf).build()
+    }
 
     public Scalar squared(){
         return Scalar.builder()
