@@ -1,0 +1,23 @@
+vector is scalar and direction
+
+scalar is numeric with a measurement type
+
+measurement type is in Unit measure lib
+
+direction is 3d dim x,y,z or 2 angles- theta and rho  Relative to a frame or body
+
+Frame0 is base frame position x,y,z === 0, radial angle theta of 0 = x axis, polar angle rho of 0 = z axis
+
+Body is an object with physical attributes
+    relative position to another frame/body where 0,0,0 is defined as 1.fixed point relative to other frame/body or 2.moving with
+     respect to other frame/body - orbits
+    relative orientation to another frame/body
+    relative linear motion vector to another frame/body
+    relative rotation to another frame/body or it's own axis
+
+=== MAYBE>>>
+Additional frames are fixed or not fixed
+    relative position to another frame/body where 0,0,0 is defined as fixed point from other frame/body or moving with
+     respect to other frame/body - orbits or vectors
+    relative orientation to another frame/body where theta and rho are defined as fixed angles from other frame/body
+     or moving with respect to other frame/body - rotation
