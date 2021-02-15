@@ -1,6 +1,7 @@
 package com.carpeCosmos.geometry;
 
-import com.carpeCosmos.unitMeasure.domain.*;
+import com.carpe_cosmos.unit_measure.domain.SimpleUnitMeasurement;
+import com.carpe_cosmos.unit_measure.domain.UnitMeasurementFraction;
 import lombok.Builder;
 
 import java.util.Arrays;
@@ -32,14 +33,14 @@ public class Scalar
     }
 
     public Scalar matchUnitMeasurementScale(Scalar other){
-        if(this,unitMeasurementFraction.isEquivalentMeasurement(other.unitMeasurementFraction))
-        Scalar result = Scalar.builder().magnitude(mag).unitMeasurementFraction(umf).build()
+        if(this.unitMeasurementFraction.isEquivalentMeasurement(other.unitMeasurementFraction))
+        Scalar result = Scalar.builder().magnitude(mag).unitMeasurementFraction(umf).build();
     }
 
     public Scalar squared(){
         return Scalar.builder()
-                .magnitude(magnitude.doubleValue()*magnitude.doubleValue())
-                .unitMeasurementFraction(UnitMeasurementFraction(unitMeasurementFraction.times(unitMeasurementFraction)))
+                .magnitude(this.magnitude.doubleValue() * this.magnitude.doubleValue())
+                .unitMeasurementFraction(this.unitMeasurementFraction.times(this.unitMeasurementFraction))
                 .build();
     }
 
